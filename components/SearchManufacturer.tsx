@@ -17,6 +17,8 @@ import Image from "next/image";
 const SearchManufacturer = ({
   manufacturer,
   setManufacturer,
+  selected,
+  setSelected,
 }: SearchManufacturerProps) => {
   const [query, setQuery] = useState("");
 
@@ -32,7 +34,7 @@ const SearchManufacturer = ({
 
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox value={selected} onChange={setSelected}>
         <div className="relative w-full">
           <ComboboxButton className="absolute top-[14px]">
             <Image
@@ -65,11 +67,28 @@ const SearchManufacturer = ({
                   key={item}
                   value={item}
                   className={({
-                    active,
+                    selected,
                   }) => `relative search-manufacturer__option
-                ${active ? "bg-primary-blue text-white" : "text-gray-900"}`}
+        ${selected ? "bg-primary-blue text-white" : "text-gray-900"}`}
                 >
-                  {item}
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          selected ? "font-medium" : "font-normal"
+                        }`}
+                      >
+                        {item}
+                      </span>
+                      {selected ? (
+                        <span
+                          className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                            selected ? "text-white" : "text-teal-600"
+                          }`}
+                        ></span>
+                      ) : null}
+                    </>
+                  )}
                 </ComboboxOption>
               ))}
             </ComboboxOptions>
