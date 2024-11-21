@@ -1,8 +1,9 @@
 import { Footer, NavBar } from "@/components";
 import "./globals.css";
+import Head from "next/head";
 
 export const metadata = {
-  title: "Cur Hub",
+  title: "CurHub",
   description: "Descubre los mejores coches del mundo",
 };
 
@@ -13,6 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+      </head>
       <body className="relative">
         <NavBar />
         {children}
